@@ -33,7 +33,7 @@ const restricted = (req, res, next) => {
 
 const only = role_name => (req, res, next) => {
   if (req.decodedJwt.role_name !== role_name) {
-    return next({status: 401, message: "This is not for you"})
+    return next({status: 403, message: "This is not for you"})
   }
   next()
   /*
@@ -60,6 +60,7 @@ const checkUsernameExists = async (req, res, next) => {
         username: user.username,
         password: user.password,
         role_name: user.role_name,
+        user_id: user.user_id,
       }
       next()
     }
